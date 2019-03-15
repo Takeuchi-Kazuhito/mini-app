@@ -1,0 +1,40 @@
+<div class="container">
+
+  <div class="justify-content-center mt-5 mb-5">
+    <div class="card">
+
+      <div class="row card-body">
+        <% if @user.avatar.attached? %>
+          <%= image_tag  @user.avatar, class: "avatar_user rounded-circle img-fluid col-3 p-0 ml-3 my-auto" %>
+        <% else %>
+          <%= image_tag ("icon.jpeg"), class: "avatar_user rounded-circle img-fluid col-3 p-0 ml-3 my-auto" %>
+        <% end %>
+        <div class="col-6 py-3 ml-2">
+          <h4 class="card-title"><%= @user.name%></h4>
+          <h6 class="card-subtitle mb-4 text-muted"><%= @user.unique_id %></h6>
+          <p class="card-text mb-4">
+            <%= @user.introduction %>
+          </p>
+          <% if user_signed_in? && current_user.id == @user.id%>
+            <a href="/users/<%= @user.id %>/edit" class="card-link">edit</a>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="row">
+      <% @tweets.each do |tweet| %>
+        <div class="col-lg-4 col-md-6">
+          <div class="card mb-5">
+            <a href="/tweets/<%= tweet.id %>"><img class="image_object-fit" src="<%= tweet.image.to_s %>" alt="Card image"></a>
+          </div>
+        </div>
+      <% end %>
+  </div>
+
+</div>
+
+
